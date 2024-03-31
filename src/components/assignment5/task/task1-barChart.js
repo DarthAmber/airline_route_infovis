@@ -5,14 +5,12 @@ import { XAxis, YAxis } from "./axes";
 
 
 export function BarChart(props) {
-  const { offsetX, offsetY, data, height, width, selectedAirline: selectedAirlineID, setSelectedAirline: setSelectedAirlineID } = props;
+  const { offsetX, offsetY, data, height, width } = props;
 
   const maxCount = Math.max(...data.map((d) => d.Count));
   const xScale = scaleLinear().range([0, width]).domain([0, maxCount]).nice();
   const yScale = scaleBand().range([0, height]).domain(data.map((d) => d.AirlineName)).padding(0.2);
-  const color = (d) => d.AirlineID === selectedAirlineID ? "#992a5b" : "#2a5599";
-  const onMouseOver = (d) => setSelectedAirlineID(d.AirlineID);
-  const onMouseOut = () => setSelectedAirlineID(null);
+  const color = (d) => '#2a5599';
 
   return (
     <g transform={`translate(${offsetX}, ${offsetY})`}>
@@ -25,10 +23,9 @@ export function BarChart(props) {
           height={yScale.bandwidth()}
           stroke="black"
           fill={color(d)}
-          onMouseOver={() => onMouseOver(d)}
-          onMouseOut={onMouseOut}
         />
       ))}
+
       <XAxis xScale={xScale} width={width} height={height} />
       <YAxis yScale={yScale} height={height} offsetX={offsetX} />
     </g>

@@ -6,7 +6,7 @@ import { Row, Col, Container } from "react-bootstrap";
 import { groupByAirline, groupByAirport } from "../components/assignment5/utils";
 import { AirportMap }  from "../components/assignment5/airportMap";
 import { BarChart } from "../components/assignment5/barChart";
-
+import styles from "@/styles/assignment5_styles.module.css";
 
 const csvUrl = 'https://gist.githubusercontent.com/hogwild/9367e694e12bd2616205e4b3e91285d5/raw/9b451dd6bcc148c3553f550c92096a1a58e1e1e5/airline-routes.csv';
 const mapUrl = 'https://gist.githubusercontent.com/hogwild/26558c07f9e4e89306f864412fbdba1d/raw/5458902712c01c79f36dc28db33e345ee71487eb/countries.geo.json';
@@ -49,7 +49,7 @@ function AirlineRoutes(){
 
     const routes = useData(csvUrl);
     const map = useMap(mapUrl);
-    
+
     if (!map || !routes) {
         return <pre>Loading...</pre>;
     };
@@ -58,14 +58,14 @@ function AirlineRoutes(){
     return <Container >
         <Row className={"justify-content-md-left"}>
             <Col lg={10} >
-                <h1>Airlines Routes</h1> 
+                <h1 className={styles.h1Style}>Airlines Routes</h1>
             </Col>
-        </Row>  
+        </Row>
         <Row className={"justify-content-md-left"}>
         <Col lg={4}>
             <h2>Airlines</h2>
-            <svg id={"barchart"} width={barchart_width} height={barchart_height}>
-                <BarChart offsetX={barchart_margin.left} offsetY={barchart_margin.top} 
+            <svg className={styles.svgStyle} id={"barchart"} width={barchart_width} height={barchart_height}>
+                <BarChart offsetX={barchart_margin.left} offsetY={barchart_margin.top}
                     height={barchart_inner_height} width={barchart_inner_width} data={airlines}
                     selectedAirline={selectedAirline} setSelectedAirline={setSelectedAirline}
                 />
@@ -73,8 +73,8 @@ function AirlineRoutes(){
         </Col>
         <Col lg={4} >
             <h2>Airports</h2>
-            <svg id={"map"} width={map_width} height={map_height}>
-                <AirportMap width={map_width} height={map_height} 
+            <svg className={styles.svgStyle} id={"map"} width={map_width} height={map_height}>
+                <AirportMap width={map_width} height={map_height}
                     countries={map} airports={airports} routes={routes}
                     selectedAirline={selectedAirline}
                 />

@@ -5,7 +5,7 @@ import { count } from "d3";
 
 
 function AirportMap(props) {
-  const { width, height, countries, airports, routes, selectedAirline: selectedAirlineID } = props;
+  const { width, height, countries, airports, routes, selectedAirlineID } = props;
   const projection = geoMercator()
   .scale(97)
   .translate([width / 2, height / 2 + 20]);
